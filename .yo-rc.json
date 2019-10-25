@@ -1,0 +1,50 @@
+{
+  "generator-jhipster": {
+    "promptValues": {
+      "packageName": "com.surf.advisor.map.supplier"
+    },
+    "jhipsterVersion": "6.4.1",
+    "applicationType": "microservice",
+    "baseName": "mapSupplier",
+    "packageName": "com.surf.advisor.map.supplier",
+    "packageFolder": "com/surf/advisor/map/supplier",
+    "serverPort": "8082",
+    "authenticationType": "jwt",
+    "cacheProvider": "caffeine",
+    "enableHibernateCache": false,
+    "websocket": false,
+    "databaseType": "no",
+    "devDatabaseType": "no",
+    "prodDatabaseType": "no",
+    "searchEngine": false,
+    "messageBroker": false,
+    "serviceDiscoveryType": false,
+    "buildTool": "maven",
+    "enableSwaggerCodegen": true,
+    "jwtSecretKey": "MTJiNDQ5ZDAwMDA5YTkxZmRhMmI2NWM4OThiZTE0YzY4YjM3ZjBjMTcxNzI3OWJiNGQ3MTMwMDVlNDk5NTY3ZGZlYTU2N2U1OTViOTRjYzIzOWQwNjVhM2UzMWFjZmJkYmZjMjFhZTMzNjY1OTJkZmU0ZTI1YWRiMDE5MmQyNzI=",
+    "embeddableLaunchScript": false,
+    "testFrameworks": [],
+    "jhiPrefix": "jhi",
+    "entitySuffix": "",
+    "dtoSuffix": "DTO",
+    "otherModules": [
+      {
+        "name": "generator-jhipster-swagger-cli",
+        "version": "3.0.1"
+      },
+      {
+        "name": "generator-jhipster-feign-client",
+        "version": "1.0.6"
+      },
+      {
+        "name": "@xiges/generator-jhipster-firebase",
+        "version": "0.0.5"
+      }
+    ],
+    "enableTranslation": false,
+    "clientPackageManager": "npm",
+    "blueprints": [],
+    "skipClient": true,
+    "skipUserManagement": true
+  }
+}
