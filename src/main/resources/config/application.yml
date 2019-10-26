@@ -78,7 +78,7 @@ management:
 
 spring:
   application:
-    name: mapSupplier
+    name: map-supplier
   profiles:
     # The commented value for `active` can be replaced with valid Spring profiles to load.
     # Otherwise, it will be filled in by maven when building the JAR file
@@ -112,7 +112,7 @@ spring:
 
 server:
   servlet:
-    context-path: /services/${spring.application.name}
+    context-path: /${spring.application.name}
     session:
       cookie:
         http-only: true
@@ -142,7 +142,7 @@ jhipster:
   mail:
     from: mapSupplier@localhost
   swagger:
-    default-include-pattern: /api/.*
+    default-include-pattern: /map-supplier.*
     title: mapSupplier API
     description: mapSupplier API documentation
     version: 0.0.1
@@ -162,3 +162,11 @@ jhipster:
 # ===================================================================
 
 # application:
+
+spot-client:
+  ribbon:
+    listOfServers: localhost:8001
+
+geolocation-client:
+  ribbon:
+    listOfServers: localhost:8000

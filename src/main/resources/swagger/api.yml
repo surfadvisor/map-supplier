@@ -1,22 +1,123 @@
 # API-first development with OpenAPI
 # This file will be used at compile time to generate Spring-MVC endpoint stubs using openapi-generator
-openapi: '3.0.1'
+
+openapi: "3.0.1"
 info:
-  title: 'mapSupplier'
+  title: 'map-supplier'
   version: 0.0.1
-servers:
-  - url: http://localhost:8082
-    description: Development server
-  - url: https://localhost:8082
-    description: Development server with TLS Profile
-paths: {}
+
+paths:
+  /map-supplier/rectangle/{pointA*}/{pointB*}:
+    get:
+      tags:
+        - map-supplier
+      summary: Find objects on map within given rectangle
+      operationId: queryRectangle
+      parameters:
+
+        - in: path
+          name: pointA*
+          required: true
+          schema:
+            type: array
+            items:
+              type: number
+              format: double
+            minItems: 2
+            maxItems: 2
+
+        - in: path
+          name: pointB*
+          required: true
+          schema:
+            type: array
+            items:
+              type: number
+              format: double
+            minItems: 2
+            maxItems: 2
+
+        - in: query
+          name: objectTypes
+          required: true
+          schema:
+            type: array
+            items:
+              $ref: '#/components/schemas/ObjectType'
+            minItems: 1
+
+      responses:
+        200:
+          description: "ok"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/MapSupplierResponse"
 
 components:
-  securitySchemes:
-    jwt:
-      type: http
-      description: JWT Authentication
-      scheme: bearer
-      bearerFormat: JWT
-security:
-  - jwt: []
+  schemas:
+
+    MapSupplierResponse:
+      type: "object"
+      properties:
+        matchedRectangle:
+          $ref: '#/components/schemas/QueryRectangle'
+        points:
+          type: array
+          items:
+            $ref: '#/components/schemas/PointShortInfo'
+        pointIds:
+          type: array
+          items:
+            $ref: '#/components/schemas/PointId'
+
+    QueryRectangle:
+      type: "object"
+      properties:
+        pointA:
+          $ref: '#/components/schemas/PointCoords'
+        pointB:
+          $ref: '#/components/schemas/PointCoords'
+
+    PointCoords:
+      type: "object"
+      properties:
+        latitude:
+          type: number
+          format: double
+        longitude:
+          type: number
+          format: double
+
+    PointId:
+      type: "object"
+      properties:
+        objectType:
+          $ref: '#/components/schemas/ObjectType'
+        objectId:
+          type: string
+
+    ObjectType:
+      type: string
+      enum: [SPOT]
+
+    PointShortInfo:
+      type: "object"
+      properties:
+        pointId:
+          $ref: '#/components/schemas/PointId'
+        coords:
+          $ref: '#/components/schemas/PointCoords'
+        name:
+          type: string
+        city:
+          type: string
+        state:
+          type: string
+        country:
+          type: string
+        photoUrl:
+          type: string
+        distance:
+          description: specified in meters
+          type: integer
