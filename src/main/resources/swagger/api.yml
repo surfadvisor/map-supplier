@@ -46,6 +46,26 @@ paths:
               $ref: '#/components/schemas/ObjectType'
             minItems: 1
 
+        - in: query
+          name: status
+          schema:
+            $ref: '#/components/schemas/ObjectStatus'
+
+        - in: query
+          name: country
+          schema:
+            type: string
+
+        - in: query
+          name: state
+          schema:
+            type: string
+
+        - in: query
+          name: city
+          schema:
+            type: string
+
       responses:
         200:
           description: "ok"
@@ -61,7 +81,7 @@ components:
       type: "object"
       properties:
         matchedRectangle:
-          $ref: '#/components/schemas/QueryRectangle'
+          $ref: '#/components/schemas/Rectangle'
         points:
           type: array
           items:
@@ -71,7 +91,7 @@ components:
           items:
             $ref: '#/components/schemas/PointId'
 
-    QueryRectangle:
+    Rectangle:
       type: "object"
       properties:
         pointA:
@@ -104,8 +124,12 @@ components:
     PointShortInfo:
       type: "object"
       properties:
-        pointId:
-          $ref: '#/components/schemas/PointId'
+        cluster:
+          type: boolean
+        pointIds:
+          type: array
+          items:
+            $ref: '#/components/schemas/PointId'
         coords:
           $ref: '#/components/schemas/PointCoords'
         name:
@@ -121,3 +145,11 @@ components:
         distance:
           description: specified in meters
           type: integer
+
+    ObjectStatus:
+      type: "string"
+      enum:
+        - "DRAFT"
+        - "DECLINED"
+        - "AVAILABLE"
+      default: "AVAILABLE"

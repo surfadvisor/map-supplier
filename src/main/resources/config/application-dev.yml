@@ -49,9 +49,6 @@ spring:
   zipkin: # Use the "zipkin" Maven profile to have the Spring Cloud Zipkin dependencies
     base-url: http://localhost:9411
     enabled: false
-    locator:
-      discovery:
-        enabled: true
 
 server:
   port: ${PORT:8002}
