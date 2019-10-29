@@ -34,7 +34,7 @@ public interface SpotApi {
         @ApiResponse(code = 200, message = "ok", response = SpotIdListResponse.class) })
     @RequestMapping(value = "/spots/filter-ids",
         produces = "application/json", 
-        consumes = "application/xml",
+        consumes = "application/json",
         method = RequestMethod.GET)
     ResponseEntity<SpotIdListResponse> filterSpotIds(@ApiParam(value = "spot query filters" ,required=true )  @Valid @RequestBody SpotFilters filters);
 
