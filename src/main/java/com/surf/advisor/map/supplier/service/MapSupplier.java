@@ -17,11 +17,14 @@ import com.surf.advisor.map.supplier.web.api.model.MapSupplierResponse;
 import com.surf.advisor.map.supplier.web.api.model.PointId;
 import com.surf.advisor.map.supplier.web.api.model.PointShortInfo;
 import com.surf.advisor.map.supplier.web.api.model.Rectangle;
+import java.util.Collection;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Set;
+import java.util.stream.Stream;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.HttpEntity;
 import org.springframework.stereotype.Service;
 
 @Slf4j
@@ -101,7 +104,18 @@ public class MapSupplier implements IMapSupplier {
 
     private void decorateDetails(PointShortInfo cluster) {
         if (isSinglePoint(cluster)) {
-            //TODO: retrieve spot details and decorate that single point with it
+            cluster.getPointIds().stream().findFirst()
+                .map(id -> spotClient.getSpot(id.getObjectId()))
+                .map(HttpEntity::getBody)
+                .ifPresent(spot -> {
+                    cluster.setName(spot.getName());
+                    cluster.setCity(spot.getCity());
+                    cluster.setState(spot.getState());
+                    cluster.setCountry(spot.getCountry());
+
+                    Stream.ofNullable(spot.getPhotoUrls()).flatMap(Collection::stream)
+                        .findFirst().ifPresent(cluster::setPhotoUrl);
+                });
         }
     }
 

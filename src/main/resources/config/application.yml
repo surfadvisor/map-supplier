@@ -23,9 +23,9 @@ feign:
            connectTimeout: 10000
            readTimeout: 10000
   spots:
-    url: localhost:8001
+    url: ${SPOTS_HOST:localhost:8001}
   geolocation:
-    url: localhost:8000
+    url: ${GEO_HOST:localhost:8000}
 
 # See https://github.com/Netflix/Hystrix/wiki/Configuration
 hystrix:
