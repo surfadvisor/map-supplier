@@ -1,7 +1,8 @@
 {
   "generator-jhipster": {
     "promptValues": {
-      "packageName": "com.surf.advisor.map.supplier"
+      "packageName": "com.surf.advisor.map.supplier",
+      "customEndpoint": "https://raw.githubusercontent.com/surfadvisor/spot-service/master/src/main/resources/swagger/api.yml"
     },
     "jhipsterVersion": "6.4.1",
     "applicationType": "microservice",

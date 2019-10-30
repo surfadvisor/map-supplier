@@ -1,8 +1,6 @@
 package com.surf.advisor.map.supplier.client.spot.model;
 
-import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonValue;
 import io.swagger.annotations.ApiModelProperty;
 import java.util.ArrayList;
 import java.util.List;
@@ -13,7 +11,7 @@ import javax.validation.constraints.NotNull;
 /**
  * Spot
  */
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2019-10-25T23:03:35.113761100+02:00[Europe/Belgrade]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2019-10-30T23:19:38.378218400+01:00[Europe/Belgrade]")
 
 public class Spot   {
   @JsonProperty("id")
@@ -35,41 +33,8 @@ public class Spot   {
   @Valid
   private List<String> photoUrls = null;
 
-  /**
-   * spot status, promoted by moderator
-   */
-  public enum StatusEnum {
-    DRAFT("DRAFT"),
-    
-    DECLINED("DECLINED"),
-    
-    AVAILABLE("AVAILABLE");
-
-    private String value;
-
-    StatusEnum(String value) {
-      this.value = value;
-    }
-
-    @Override
-    @JsonValue
-    public String toString() {
-      return String.valueOf(value);
-    }
-
-    @JsonCreator
-    public static StatusEnum fromValue(String value) {
-      for (StatusEnum b : StatusEnum.values()) {
-        if (b.value.equals(value)) {
-          return b;
-        }
-      }
-      throw new IllegalArgumentException("Unexpected value '" + value + "'");
-    }
-  }
-
   @JsonProperty("status")
-  private StatusEnum status;
+  private SpotStatus status = SpotStatus.AVAILABLE;
 
   public Spot id(String id) {
     this.id = id;
@@ -203,23 +168,24 @@ public class Spot   {
     this.photoUrls = photoUrls;
   }
 
-  public Spot status(StatusEnum status) {
+  public Spot status(SpotStatus status) {
     this.status = status;
     return this;
   }
 
   /**
-   * spot status, promoted by moderator
+   * Get status
    * @return status
   */
-  @ApiModelProperty(value = "spot status, promoted by moderator")
+  @ApiModelProperty(value = "")
 
+  @Valid
 
-  public StatusEnum getStatus() {
+  public SpotStatus getStatus() {
     return status;
   }
 
-  public void setStatus(StatusEnum status) {
+  public void setStatus(SpotStatus status) {
     this.status = status;
   }
 

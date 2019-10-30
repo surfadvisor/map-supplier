@@ -9,7 +9,7 @@ import java.util.Objects;
  * modified spot identifier
  */
 @ApiModel(description = "modified spot identifier")
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2019-10-25T23:03:35.113761100+02:00[Europe/Belgrade]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2019-10-30T23:19:38.378218400+01:00[Europe/Belgrade]")
 
 public class SpotIdResponse   {
   @JsonProperty("id")

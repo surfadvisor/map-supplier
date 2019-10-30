@@ -19,11 +19,12 @@ import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2019-10-25T23:03:35.113761100+02:00[Europe/Belgrade]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2019-10-30T23:19:38.378218400+01:00[Europe/Belgrade]")
 
 @Validated
 @Api(value = "Spot", description = "the Spot API")
@@ -47,6 +48,15 @@ public interface SpotApi {
         consumes = "application/xml",
         method = RequestMethod.GET)
     ResponseEntity<PagedSpotResponse> findSpots(@NotNull @ApiParam(value = "page size", required = true, defaultValue = "100") @Valid @RequestParam(value = "limit", required = true, defaultValue="100") Integer limit,@ApiParam(value = "spot query filters" ,required=true )  @Valid @RequestBody SpotFilters filters,@ApiParam(value = "last evaluated key received from previous dynamoDB query") @Valid @RequestParam(value = "lastKey", required = false) String lastKey);
+
+
+    @ApiOperation(value = "Find spot by identifier", nickname = "getSpot", notes = "", response = Spot.class, tags={ "spot", })
+    @ApiResponses(value = { 
+        @ApiResponse(code = 200, message = "ok", response = Spot.class) })
+    @RequestMapping(value = "/spots/{id}",
+        produces = "application/json", 
+        method = RequestMethod.GET)
+    ResponseEntity<Spot> getSpot(@ApiParam(value = "",required=true) @PathVariable("id") String id);
 
 
     @ApiOperation(value = "post new spot", nickname = "postSpot", notes = "", response = SpotIdResponse.class, tags={ "spot", })

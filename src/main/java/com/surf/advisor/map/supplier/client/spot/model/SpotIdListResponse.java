@@ -12,7 +12,7 @@ import javax.validation.Valid;
  * spot identifiers
  */
 @ApiModel(description = "spot identifiers")
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2019-10-25T23:03:35.113761100+02:00[Europe/Belgrade]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2019-10-30T23:19:38.378218400+01:00[Europe/Belgrade]")
 
 public class SpotIdListResponse   {
   @JsonProperty("ids")
