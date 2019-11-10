@@ -20,8 +20,8 @@ feign:
   client:
     config:
        default:
-           connectTimeout: 10000
-           readTimeout: 10000
+           connectTimeout: 100000
+           readTimeout: 100000
   spots:
     url: ${SPOTS_HOST:localhost:8001}
   geolocation:
@@ -36,7 +36,7 @@ hystrix:
           strategy: SEMAPHORE
           # See https://github.com/spring-cloud/spring-cloud-netflix/issues/1330
           thread:
-            timeoutInMilliseconds: 10000
+            timeoutInMilliseconds: 100000
   shareSecurityContext: true
 
 management:
