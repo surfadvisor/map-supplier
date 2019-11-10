@@ -780,7 +780,6 @@
                     <version>${mvn.release.plugin.version}</version>
                     <configuration>
                         <autoVersionSubmodules>true</autoVersionSubmodules>
-                        <preparationGoals>clean install</preparationGoals>
                     </configuration>
                 </plugin>
                 <!-- jhipster-needle-maven-add-plugin-management -->
