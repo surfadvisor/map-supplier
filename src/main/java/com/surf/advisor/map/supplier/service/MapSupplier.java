@@ -10,7 +10,7 @@ import com.surf.advisor.geolocation.api.model.RectangleGeolocationRequest;
 import com.surf.advisor.map.supplier.client.geo.api.GeolocationApiClient;
 import com.surf.advisor.map.supplier.client.mapper.GeoMapper;
 import com.surf.advisor.map.supplier.client.mapper.SpotMapper;
-import com.surf.advisor.map.supplier.client.spot.api.SpotApiClient;
+import com.surf.advisor.map.supplier.client.spot.api.SpotApiConnector;
 import com.surf.advisor.map.supplier.client.spot.model.SpotFilters;
 import com.surf.advisor.map.supplier.domain.RectangleMapQuery;
 import com.surf.advisor.map.supplier.web.api.model.MapSupplierResponse;
@@ -24,7 +24,6 @@ import java.util.Set;
 import java.util.stream.Stream;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.http.HttpEntity;
 import org.springframework.stereotype.Service;
 
 @Slf4j
@@ -33,7 +32,7 @@ import org.springframework.stereotype.Service;
 public class MapSupplier implements IMapSupplier {
 
     private final GeolocationApiClient geoClient;
-    private final SpotApiClient spotClient;
+    private final SpotApiConnector spotClient;
 
     @Override
     public MapSupplierResponse queryRectangle(RectangleMapQuery query) {
@@ -93,12 +92,11 @@ public class MapSupplier implements IMapSupplier {
 
         var response = spotClient.filterSpotIds(filters);
 
-        if (response.getBody() == null) {
-            log.error("Spot API response code: {}, skip filtering", response.getStatusCode());
+        if (response == null) {
             return pointIds;
         }
 
-        return response.getBody().getIds().stream()
+        return response.getIds().stream()
             .map(id -> new PointId().objectId(id).objectType(SPOT)).collect(toList());
     }
 
@@ -106,7 +104,6 @@ public class MapSupplier implements IMapSupplier {
         if (isSinglePoint(cluster)) {
             cluster.getPointIds().stream().findFirst()
                 .map(id -> spotClient.getSpot(id.getObjectId()))
-                .map(HttpEntity::getBody)
                 .ifPresent(spot -> {
                     cluster.setName(spot.getName());
                     cluster.setCity(spot.getCity());

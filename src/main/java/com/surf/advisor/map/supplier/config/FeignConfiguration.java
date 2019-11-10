@@ -1,5 +1,6 @@
 package com.surf.advisor.map.supplier.config;
 
+import feign.Logger.Level;
 import org.springframework.cloud.openfeign.EnableFeignClients;
 import org.springframework.cloud.openfeign.FeignClientsConfiguration;
 import org.springframework.context.annotation.Bean;
@@ -16,7 +17,7 @@ public class FeignConfiguration {
      */
     @Bean
     feign.Logger.Level feignLoggerLevel() {
-        return feign.Logger.Level.BASIC;
+        return Level.FULL;
     }
 
 }

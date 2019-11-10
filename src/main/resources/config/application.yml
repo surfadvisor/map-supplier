@@ -115,6 +115,8 @@ spring:
       console-available: true
   jackson:
     default-property-inclusion: non_null
+  cache:
+    cache-names: geolocations, spots
 
 server:
   servlet:

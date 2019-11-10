@@ -80,7 +80,7 @@
         <s3.storage.wagon.version>1.8</s3.storage.wagon.version>
 
         <!-- SurfAdvisor dependencies -->
-        <surf.geolocation.version>0.0.1</surf.geolocation.version>
+        <surf.geolocation.version>0.0.3</surf.geolocation.version>
     </properties>
 
     <dependencyManagement>

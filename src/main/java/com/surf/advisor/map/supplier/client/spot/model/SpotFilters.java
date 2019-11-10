@@ -2,6 +2,7 @@ package com.surf.advisor.map.supplier.client.spot.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import io.swagger.annotations.ApiModelProperty;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -12,7 +13,7 @@ import javax.validation.Valid;
  */
 @javax.annotation.Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2019-10-30T23:19:38.378218400+01:00[Europe/Belgrade]")
 
-public class SpotFilters   {
+public class SpotFilters implements Serializable {
   @JsonProperty("ids")
   @Valid
   private List<String> ids = null;
