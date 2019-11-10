@@ -59,9 +59,6 @@ public class GridSnapUtils {
             POINT_OPERATORS.forEach((get, set) -> {
                 double x = get.apply(point);
                 double quantized = round(x / cellSize, 0) * cellSize;
-                if (quantized == 0) {
-                    quantized = 0.000001;
-                }
                 set.accept(point, quantized);
             }));
     }

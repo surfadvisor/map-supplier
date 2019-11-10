@@ -9,6 +9,13 @@
     <packaging>jar</packaging>
     <name>Map Supplier</name>
 
+    <scm>
+        <url>https://github.com/surfadvisor/map-supplier</url>
+        <connection>scm:git:https://github.com/surfadvisor/map-supplier</connection>
+        <developerConnection>scm:git:https://github.com/surfadvisor/map-supplier</developerConnection>
+        <tag>HEAD</tag>
+    </scm>
+
     <repositories>
         <repository>
             <id>repo.surf.advisor</id>
@@ -82,6 +89,7 @@
         <!-- SurfAdvisor dependencies -->
         <surf.geolocation.version>0.0.3</surf.geolocation.version>
         <apache.commons.math.version>3.6.1</apache.commons.math.version>
+        <mvn.release.plugin.version>2.5.3</mvn.release.plugin.version>
     </properties>
 
     <dependencyManagement>
@@ -766,6 +774,15 @@
                     <artifactId>spring-boot-maven-plugin</artifactId>
                     <version>${spring-boot.version}</version>
                 </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-release-plugin</artifactId>
+                    <version>${mvn.release.plugin.version}</version>
+                    <configuration>
+                        <autoVersionSubmodules>true</autoVersionSubmodules>
+                        <preparationGoals>clean install</preparationGoals>
+                    </configuration>
+                </plugin>
                 <!-- jhipster-needle-maven-add-plugin-management -->
             </plugins>
         </pluginManagement>
@@ -841,6 +858,10 @@
                     <plugin>
                         <groupId>pl.project13.maven</groupId>
                         <artifactId>git-commit-id-plugin</artifactId>
+                    </plugin>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-release-plugin</artifactId>
                     </plugin>
                 </plugins>
             </build>
