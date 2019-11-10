@@ -1,0 +1,39 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+    name: map-supplier
+spec:
+    selector:
+        matchLabels:
+            app: map-supplier
+    replicas: 1
+    template:
+        metadata:
+            labels:
+                app: map-supplier
+        spec:
+            containers:
+                - name: map-supplier
+                  image: <X>
+                  ports:
+                    - containerPort: 8080
+                  env:
+                    - name: SPOTS_HOST
+                      value: spot-service:8080
+                    - name: GEO_HOST
+                      value: geolocation-service:8080
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+    name: map-supplier
+spec:
+    selector:
+        app: map-supplier
+    ports:
+        - name: http
+          port: 8080
+          targetPort: 8080
+          protocol: TCP
+    type: ClusterIP
