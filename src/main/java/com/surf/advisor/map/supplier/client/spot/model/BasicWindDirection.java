@@ -4,19 +4,29 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
 
 /**
- * Gets or Sets SpotStatus
+ * Gets or Sets BasicWindDirection
  */
-public enum SpotStatus {
+public enum BasicWindDirection {
 
-  DRAFT("DRAFT"),
+  N("N"),
 
-  DECLINED("DECLINED"),
+  NE("NE"),
 
-  AVAILABLE("AVAILABLE");
+  E("E"),
+
+  SE("SE"),
+
+  S("S"),
+
+  SW("SW"),
+
+  W("W"),
+
+  NW("NW");
 
   private String value;
 
-  SpotStatus(String value) {
+  BasicWindDirection(String value) {
     this.value = value;
   }
 
@@ -27,8 +37,8 @@ public enum SpotStatus {
   }
 
   @JsonCreator
-  public static SpotStatus fromValue(String value) {
-    for (SpotStatus b : SpotStatus.values()) {
+  public static BasicWindDirection fromValue(String value) {
+    for (BasicWindDirection b : BasicWindDirection.values()) {
       if (b.value.equals(value)) {
         return b;
       }

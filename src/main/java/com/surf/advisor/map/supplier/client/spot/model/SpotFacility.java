@@ -4,19 +4,15 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
 
 /**
- * Gets or Sets SpotStatus
+ * Gets or Sets SpotFacility
  */
-public enum SpotStatus {
+public enum SpotFacility {
 
-  DRAFT("DRAFT"),
-
-  DECLINED("DECLINED"),
-
-  AVAILABLE("AVAILABLE");
+  SCHOOLS("SCHOOLS");
 
   private String value;
 
-  SpotStatus(String value) {
+  SpotFacility(String value) {
     this.value = value;
   }
 
@@ -27,8 +23,8 @@ public enum SpotStatus {
   }
 
   @JsonCreator
-  public static SpotStatus fromValue(String value) {
-    for (SpotStatus b : SpotStatus.values()) {
+  public static SpotFacility fromValue(String value) {
+    for (SpotFacility b : SpotFacility.values()) {
       if (b.value.equals(value)) {
         return b;
       }

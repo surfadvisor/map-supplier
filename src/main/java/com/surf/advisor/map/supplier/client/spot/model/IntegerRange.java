@@ -1,51 +1,60 @@
 package com.surf.advisor.map.supplier.client.spot.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 
-import javax.validation.Valid;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Objects;
 
 /**
- * spot identifiers
+ * IntegerRange
  */
-@ApiModel(description = "spot identifiers")
 @javax.annotation.Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2019-11-29T18:51:13.606+01:00[Europe/Belgrade]")
 
-public class SpotIdListResponse   {
-  @JsonProperty("ids")
-  @Valid
-  private List<String> ids = null;
+public class IntegerRange   {
+  @JsonProperty("from")
+  private Integer from;
 
-  public SpotIdListResponse ids(List<String> ids) {
-    this.ids = ids;
-    return this;
-  }
+  @JsonProperty("to")
+  private Integer to;
 
-  public SpotIdListResponse addIdsItem(String idsItem) {
-    if (this.ids == null) {
-      this.ids = new ArrayList<String>();
-    }
-    this.ids.add(idsItem);
+  public IntegerRange from(Integer from) {
+    this.from = from;
     return this;
   }
 
   /**
-   * Get ids
-   * @return ids
+   * inclusive start number
+   * @return from
   */
-  @ApiModelProperty(value = "")
+  @ApiModelProperty(value = "inclusive start number")
 
 
-  public List<String> getIds() {
-    return ids;
+  public Integer getFrom() {
+    return from;
   }
 
-  public void setIds(List<String> ids) {
-    this.ids = ids;
+  public void setFrom(Integer from) {
+    this.from = from;
+  }
+
+  public IntegerRange to(Integer to) {
+    this.to = to;
+    return this;
+  }
+
+  /**
+   * inclusive end number
+   * @return to
+  */
+  @ApiModelProperty(value = "inclusive end number")
+
+
+  public Integer getTo() {
+    return to;
+  }
+
+  public void setTo(Integer to) {
+    this.to = to;
   }
 
 
@@ -57,21 +66,23 @@ public class SpotIdListResponse   {
     if (o == null || getClass() != o.getClass()) {
       return false;
     }
-    SpotIdListResponse spotIdListResponse = (SpotIdListResponse) o;
-    return Objects.equals(this.ids, spotIdListResponse.ids);
+    IntegerRange integerRange = (IntegerRange) o;
+    return Objects.equals(this.from, integerRange.from) &&
+        Objects.equals(this.to, integerRange.to);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(ids);
+    return Objects.hash(from, to);
   }
 
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
-    sb.append("class SpotIdListResponse {\n");
+    sb.append("class IntegerRange {\n");
 
-    sb.append("    ids: ").append(toIndentedString(ids)).append("\n");
+    sb.append("    from: ").append(toIndentedString(from)).append("\n");
+    sb.append("    to: ").append(toIndentedString(to)).append("\n");
     sb.append("}");
     return sb.toString();
   }

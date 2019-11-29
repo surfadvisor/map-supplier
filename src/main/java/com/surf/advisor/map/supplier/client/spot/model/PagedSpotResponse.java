@@ -2,18 +2,18 @@ package com.surf.advisor.map.supplier.client.spot.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import io.swagger.annotations.ApiModelProperty;
-import java.io.Serializable;
+
+import javax.validation.Valid;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
-import javax.validation.Valid;
 
 /**
  * PagedSpotResponse
  */
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2019-10-30T23:19:38.378218400+01:00[Europe/Belgrade]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2019-11-29T18:51:13.606+01:00[Europe/Belgrade]")
 
-public class PagedSpotResponse implements Serializable {
+public class PagedSpotResponse   {
   @JsonProperty("spots")
   @Valid
   private List<Spot> spots = null;
@@ -141,7 +141,7 @@ public class PagedSpotResponse implements Serializable {
   public String toString() {
     StringBuilder sb = new StringBuilder();
     sb.append("class PagedSpotResponse {\n");
-    
+
     sb.append("    spots: ").append(toIndentedString(spots)).append("\n");
     sb.append("    lastKey: ").append(toIndentedString(lastKey)).append("\n");
     sb.append("    limit: ").append(toIndentedString(limit)).append("\n");

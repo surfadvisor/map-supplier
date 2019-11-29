@@ -4,19 +4,19 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
 
 /**
- * Gets or Sets SpotStatus
+ * Gets or Sets SportType
  */
-public enum SpotStatus {
+public enum SportType {
 
-  DRAFT("DRAFT"),
+  WINDSURFING("WINDSURFING"),
 
-  DECLINED("DECLINED"),
+  KITESURFING("KITESURFING"),
 
-  AVAILABLE("AVAILABLE");
+  SURFING("SURFING");
 
   private String value;
 
-  SpotStatus(String value) {
+  SportType(String value) {
     this.value = value;
   }
 
@@ -27,8 +27,8 @@ public enum SpotStatus {
   }
 
   @JsonCreator
-  public static SpotStatus fromValue(String value) {
-    for (SpotStatus b : SpotStatus.values()) {
+  public static SportType fromValue(String value) {
+    for (SportType b : SportType.values()) {
       if (b.value.equals(value)) {
         return b;
       }

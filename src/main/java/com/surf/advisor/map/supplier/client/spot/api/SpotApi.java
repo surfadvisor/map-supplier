@@ -5,77 +5,66 @@
  */
 package com.surf.advisor.map.supplier.client.spot.api;
 
-import com.surf.advisor.map.supplier.client.spot.model.PagedSpotResponse;
-import com.surf.advisor.map.supplier.client.spot.model.Spot;
-import com.surf.advisor.map.supplier.client.spot.model.SpotFilters;
-import com.surf.advisor.map.supplier.client.spot.model.SpotIdListResponse;
-import com.surf.advisor.map.supplier.client.spot.model.SpotIdResponse;
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
-import io.swagger.annotations.ApiParam;
-import io.swagger.annotations.ApiResponse;
-import io.swagger.annotations.ApiResponses;
-import javax.validation.Valid;
-import javax.validation.constraints.NotNull;
+import com.surf.advisor.map.supplier.client.spot.model.*;
+import io.swagger.annotations.*;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2019-10-30T23:19:38.378218400+01:00[Europe/Belgrade]")
+import org.springframework.web.bind.annotation.*;
+
+import javax.validation.Valid;
+import javax.validation.constraints.NotNull;
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2019-11-29T18:51:13.606+01:00[Europe/Belgrade]")
 
 @Validated
 @Api(value = "Spot", description = "the Spot API")
 public interface SpotApi {
 
     @ApiOperation(value = "Filter spot ids", nickname = "filterSpotIds", notes = "", response = SpotIdListResponse.class, tags={ "spot", })
-    @ApiResponses(value = { 
+    @ApiResponses(value = {
         @ApiResponse(code = 200, message = "ok", response = SpotIdListResponse.class) })
     @RequestMapping(value = "/spots/filter-ids",
-        produces = "application/json", 
+        produces = "application/json",
         consumes = "application/json",
         method = RequestMethod.GET)
     ResponseEntity<SpotIdListResponse> filterSpotIds(@ApiParam(value = "spot query filters" ,required=true )  @Valid @RequestBody SpotFilters filters);
 
 
     @ApiOperation(value = "Find spots using selectors", nickname = "findSpots", notes = "", response = PagedSpotResponse.class, tags={ "spot", })
-    @ApiResponses(value = { 
+    @ApiResponses(value = {
         @ApiResponse(code = 200, message = "ok", response = PagedSpotResponse.class) })
     @RequestMapping(value = "/spots",
-        produces = "application/json", 
-        consumes = "application/xml",
+        produces = "application/json",
+        consumes = "application/json",
         method = RequestMethod.GET)
     ResponseEntity<PagedSpotResponse> findSpots(@NotNull @ApiParam(value = "page size", required = true, defaultValue = "100") @Valid @RequestParam(value = "limit", required = true, defaultValue="100") Integer limit,@ApiParam(value = "spot query filters" ,required=true )  @Valid @RequestBody SpotFilters filters,@ApiParam(value = "last evaluated key received from previous dynamoDB query") @Valid @RequestParam(value = "lastKey", required = false) String lastKey);
 
 
     @ApiOperation(value = "Find spot by identifier", nickname = "getSpot", notes = "", response = Spot.class, tags={ "spot", })
-    @ApiResponses(value = { 
+    @ApiResponses(value = {
         @ApiResponse(code = 200, message = "ok", response = Spot.class) })
     @RequestMapping(value = "/spots/{id}",
-        produces = "application/json", 
+        produces = "application/json",
         method = RequestMethod.GET)
     ResponseEntity<Spot> getSpot(@ApiParam(value = "",required=true) @PathVariable("id") String id);
 
 
     @ApiOperation(value = "post new spot", nickname = "postSpot", notes = "", response = SpotIdResponse.class, tags={ "spot", })
-    @ApiResponses(value = { 
+    @ApiResponses(value = {
         @ApiResponse(code = 200, message = "ok", response = SpotIdResponse.class) })
     @RequestMapping(value = "/spots",
-        produces = "application/json", 
-        consumes = "application/xml",
+        produces = "application/json",
+        consumes = "application/json",
         method = RequestMethod.POST)
-    ResponseEntity<SpotIdResponse> postSpot(@ApiParam(value = "spot model" ,required=true )  @Valid @RequestBody Spot spot);
+    ResponseEntity<SpotIdResponse> postSpot(@NotNull @ApiParam(value = "", required = true) @Valid @RequestParam(value = "latitude", required = true) Double latitude,@NotNull @ApiParam(value = "", required = true) @Valid @RequestParam(value = "longitude", required = true) Double longitude,@ApiParam(value = "spot model" ,required=true )  @Valid @RequestBody Spot spot);
 
 
     @ApiOperation(value = "put spot", nickname = "putSpot", notes = "", response = SpotIdResponse.class, tags={ "spot", })
-    @ApiResponses(value = { 
+    @ApiResponses(value = {
         @ApiResponse(code = 200, message = "ok", response = SpotIdResponse.class) })
     @RequestMapping(value = "/spots",
-        produces = "application/json", 
-        consumes = "application/xml",
+        produces = "application/json",
+        consumes = "application/json",
         method = RequestMethod.PUT)
-    ResponseEntity<SpotIdResponse> putSpot(@ApiParam(value = "spot model" ,required=true )  @Valid @RequestBody Spot spot);
+    ResponseEntity<SpotIdResponse> putSpot(@NotNull @ApiParam(value = "", required = true) @Valid @RequestParam(value = "latitude", required = true) Double latitude,@NotNull @ApiParam(value = "", required = true) @Valid @RequestParam(value = "longitude", required = true) Double longitude,@ApiParam(value = "spot model" ,required=true )  @Valid @RequestBody Spot spot);
 
 }

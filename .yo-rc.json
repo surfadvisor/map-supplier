@@ -46,6 +46,12 @@
     "clientPackageManager": "npm",
     "blueprints": [],
     "skipClient": true,
-    "skipUserManagement": true
+    "skipUserManagement": true,
+    "openApiClients": {
+      "spot": {
+        "spec": "https://raw.githubusercontent.com/surfadvisor/spot-service/master/src/main/resources/swagger/api.yml",
+        "generatorName": "spring"
+      }
+    }
   }
 }

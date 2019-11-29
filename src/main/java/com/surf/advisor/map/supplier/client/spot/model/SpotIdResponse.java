@@ -3,16 +3,16 @@ package com.surf.advisor.map.supplier.client.spot.model;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
-import java.io.Serializable;
+
 import java.util.Objects;
 
 /**
  * modified spot identifier
  */
 @ApiModel(description = "modified spot identifier")
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2019-10-30T23:19:38.378218400+01:00[Europe/Belgrade]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2019-11-29T18:51:13.606+01:00[Europe/Belgrade]")
 
-public class SpotIdResponse implements Serializable {
+public class SpotIdResponse   {
   @JsonProperty("id")
   private String id;
 
@@ -58,7 +58,7 @@ public class SpotIdResponse implements Serializable {
   public String toString() {
     StringBuilder sb = new StringBuilder();
     sb.append("class SpotIdResponse {\n");
-    
+
     sb.append("    id: ").append(toIndentedString(id)).append("\n");
     sb.append("}");
     return sb.toString();

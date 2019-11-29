@@ -4,19 +4,21 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
 
 /**
- * Gets or Sets SpotStatus
+ * Gets or Sets WaterCurrent
  */
-public enum SpotStatus {
+public enum WaterCurrent {
 
-  DRAFT("DRAFT"),
+  N("N"),
 
-  DECLINED("DECLINED"),
+  S("S"),
 
-  AVAILABLE("AVAILABLE");
+  M("M"),
+
+  H("H");
 
   private String value;
 
-  SpotStatus(String value) {
+  WaterCurrent(String value) {
     this.value = value;
   }
 
@@ -27,8 +29,8 @@ public enum SpotStatus {
   }
 
   @JsonCreator
-  public static SpotStatus fromValue(String value) {
-    for (SpotStatus b : SpotStatus.values()) {
+  public static WaterCurrent fromValue(String value) {
+    for (WaterCurrent b : WaterCurrent.values()) {
       if (b.value.equals(value)) {
         return b;
       }
