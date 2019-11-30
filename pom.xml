@@ -81,7 +81,7 @@
         <junit.itReportFolder>${project.testresult.directory}/integrationTest</junit.itReportFolder>
         <!-- jhipster-needle-maven-property -->
 
-        <lombok.version>1.18.6</lombok.version>
+        <lombok.version>1.18.10</lombok.version>
         <!-- artifactory S3 -->
         <s3.storage.wagon.version>1.8</s3.storage.wagon.version>
 
@@ -89,6 +89,7 @@
         <surf.geolocation.version>0.0.3</surf.geolocation.version>
         <apache.commons.math.version>3.6.1</apache.commons.math.version>
         <mvn.release.plugin.version>2.5.3</mvn.release.plugin.version>
+        <apache.lucene.spatial.version>8.3.0</apache.lucene.spatial.version>
     </properties>
 
     <dependencyManagement>
@@ -110,6 +111,11 @@
                 <artifactId>commons-math3</artifactId>
                 <version>${apache.commons.math.version}</version>
             </dependency>
+            <dependency>
+                <groupId>org.apache.lucene</groupId>
+                <artifactId>lucene-spatial</artifactId>
+                <version>${apache.lucene.spatial.version}</version>
+            </dependency>
         </dependencies>
     </dependencyManagement>
 
@@ -124,6 +130,10 @@
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.lucene</groupId>
+            <artifactId>lucene-spatial</artifactId>
         </dependency>
 
         <dependency>

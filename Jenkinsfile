@@ -1,5 +1,5 @@
 def defaults = [:]
-defaults['version'] = '0.0.1'
+defaults['version'] = '0.0.2'
 def version = params.version == null ? defaults['version'] : params.version
 
 def label = "worker-${UUID.randomUUID().toString()}"

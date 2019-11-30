@@ -4,68 +4,62 @@
 openapi: "3.0.1"
 info:
   title: 'map-supplier'
-  version: 0.0.1
+  version: 0.0.2
+
+servers:
+  - url: thesurfadvisor.com
 
 paths:
-  /map-supplier/rectangle/{pointA*}/{pointB*}:
+  /map-supplier/circle/{point}/{radius}:
+    get:
+      tags:
+        - map-supplier
+      summary: Find objects on map within a given radius
+      operationId: queryCircle
+      parameters:
+        - $ref: '#/components/parameters/singlePoint'
+        - $ref: '#/components/parameters/radius'
+        - $ref: '#/components/parameters/referenceLocation'
+        - $ref: '#/components/parameters/objectTypes'
+
+        - $ref: '#/components/parameters/status'
+        - $ref: '#/components/parameters/country'
+        - $ref: '#/components/parameters/facilities'
+        - $ref: '#/components/parameters/difficulty'
+        - $ref: '#/components/parameters/depth'
+        - $ref: '#/components/parameters/sportTypes'
+        - $ref: '#/components/parameters/waterType'
+        - $ref: '#/components/parameters/waveAvgPeriod'
+        - $ref: '#/components/parameters/waveAvgSize'
+      responses:
+        200:
+          description: "ok"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/MapSupplierResponse"
+
+  /map-supplier/rectangle/{pointA}/{pointB}:
     get:
       tags:
         - map-supplier
       summary: Find objects on map within given rectangle
       operationId: queryRectangle
       parameters:
+        - $ref: '#/components/parameters/pointA'
+        - $ref: '#/components/parameters/pointB'
+        - $ref: '#/components/parameters/referenceLocation'
+        - $ref: '#/components/parameters/objectTypes'
 
-        - in: path
-          name: pointA*
-          required: true
-          schema:
-            type: array
-            items:
-              type: number
-              format: double
-            minItems: 2
-            maxItems: 2
-
-        - in: path
-          name: pointB*
-          required: true
-          schema:
-            type: array
-            items:
-              type: number
-              format: double
-            minItems: 2
-            maxItems: 2
-
-        - in: query
-          name: objectTypes
-          required: true
-          schema:
-            type: array
-            items:
-              $ref: '#/components/schemas/ObjectType'
-            minItems: 1
-
-        - in: query
-          name: status
-          schema:
-            $ref: '#/components/schemas/ObjectStatus'
-
-        - in: query
-          name: country
-          schema:
-            type: string
-
-        - in: query
-          name: state
-          schema:
-            type: string
-
-        - in: query
-          name: city
-          schema:
-            type: string
-
+        - $ref: '#/components/parameters/status'
+        - $ref: '#/components/parameters/country'
+        - $ref: '#/components/parameters/facilities'
+        - $ref: '#/components/parameters/difficulty'
+        - $ref: '#/components/parameters/depth'
+        - $ref: '#/components/parameters/sportTypes'
+        - $ref: '#/components/parameters/waterType'
+        - $ref: '#/components/parameters/waveAvgPeriod'
+        - $ref: '#/components/parameters/waveAvgSize'
       responses:
         200:
           description: "ok"
@@ -75,7 +69,127 @@ paths:
                 $ref: "#/components/schemas/MapSupplierResponse"
 
 components:
+
+  parameters:
+    singlePoint:
+      in: path
+      name: point
+      required: true
+      schema:
+        $ref: "#/components/schemas/point"
+    pointA:
+      in: path
+      name: pointA
+      required: true
+      schema:
+        $ref: "#/components/schemas/point"
+    pointB:
+      in: path
+      name: pointB
+      required: true
+      schema:
+        $ref: "#/components/schemas/point"
+    referenceLocation:
+      in: query
+      name: referenceLocation
+      description: result points distances are calculated for this location
+      schema:
+        $ref: "#/components/schemas/point"
+
+    radius:
+      in: path
+      name: radius
+      required: true
+      description: in meters
+      schema:
+        type: integer
+
+    objectTypes:
+      in: query
+      name: objectTypes
+      required: true
+      schema:
+        type: array
+        items:
+          $ref: '#/components/schemas/ObjectType'
+        minItems: 1
+    status:
+      in: query
+      name: status
+      schema:
+        type: array
+        items:
+          $ref: '#/components/schemas/ObjectStatus'
+    country:
+      in: query
+      name: country
+      schema:
+        type: "array"
+        items:
+          $ref: "#/components/schemas/CountryCode"
+    facilities:
+      in: query
+      name: facilities
+      schema:
+        type: "array"
+        items:
+          $ref: "#/components/schemas/SpotFacility"
+    difficulty:
+      in: query
+      name: difficulty
+      schema:
+        type: "array"
+        items:
+          $ref: "#/components/schemas/Difficulty"
+    depth:
+      in: query
+      name: depth
+      schema:
+        type: "array"
+        items:
+          $ref: "#/components/schemas/Depth"
+    sportTypes:
+      in: query
+      name: sportTypes
+      schema:
+        type: "array"
+        items:
+          $ref: "#/components/schemas/SportType"
+    waterType:
+      in: query
+      name: waterType
+      schema:
+        type: "array"
+        items:
+          $ref: "#/components/schemas/WaterType"
+    waveAvgPeriod:
+      in: query
+      name: waveAvgPeriod
+      schema:
+        type: array
+        items:
+          type: integer
+        minItems: 2
+        maxItems: 2
+    waveAvgSize:
+      in: query
+      name: waveAvgSize
+      schema:
+        type: array
+        items:
+          type: integer
+        minItems: 2
+        maxItems: 2
+
   schemas:
+
+    point:
+      type: array
+      items:
+        type: number
+        format: double
+      minItems: 2
+      maxItems: 2
 
     MapSupplierResponse:
       type: "object"
@@ -85,7 +199,7 @@ components:
         points:
           type: array
           items:
-            $ref: '#/components/schemas/PointShortInfo'
+            $ref: '#/components/schemas/PointDetails'
         pointIds:
           type: array
           items:
@@ -121,7 +235,7 @@ components:
       type: string
       enum: [SPOT]
 
-    PointShortInfo:
+    PointDetails:
       type: "object"
       properties:
         cluster:
@@ -132,24 +246,153 @@ components:
             $ref: '#/components/schemas/PointId'
         coords:
           $ref: '#/components/schemas/PointCoords'
-        name:
-          type: string
-        city:
-          type: string
-        state:
-          type: string
-        country:
-          type: string
-        photoUrl:
-          type: string
         distance:
           description: specified in meters
           type: integer
+        spot:
+          $ref: '#/components/schemas/Spot'
+
+    Spot:
+      type: "object"
+      properties:
+        id:
+          type: string
+        country:
+          $ref: "#/components/schemas/CountryCode"
+        state:
+          type: "string"
+          example: "pomorskie"
+        city:
+          type: "string"
+          example: "Hel"
+        name:
+          type: "string"
+          example: "Hel Molo"
+        descriptions:
+          type: "array"
+          items:
+            $ref: "#/components/schemas/Description"
+        photoUrls:
+          type: "array"
+          items:
+            type: "string"
+        liveCamera:
+          description: "live camera urls"
+          type: "array"
+          items:
+            type: "string"
+        status:
+          $ref: "#/components/schemas/ObjectStatus"
+        sportTypes:
+          type: "array"
+          items:
+            $ref: "#/components/schemas/SportType"
+        waterType:
+          $ref: "#/components/schemas/WaterType"
+        popularity:
+          $ref: "#/components/schemas/Popularity"
+        facilities:
+          type: "array"
+          items:
+            $ref: "#/components/schemas/SpotFacility"
+        difficulty:
+          $ref: "#/components/schemas/Difficulty"
+        depth:
+          $ref: "#/components/schemas/Depth"
+        dangers:
+          type: string
+          description: free form string describing any potential risk
+        bestWindDirections:
+          type: "array"
+          items:
+            $ref: "#/components/schemas/BasicWindDirection"
+        worstWindDirections:
+          type: "array"
+          items:
+            $ref: "#/components/schemas/BasicWindDirection"
+        chopSize:
+          $ref: "#/components/schemas/ChopSize"
+        waveQuality:
+          type: integer
+          minimum: 1
+          maximum: 10
+          description: overall subjective wave quality rating
+        waveAvgPeriod:
+          type: integer
+          minimum: 1
+          description: in seconds
+        waveAvgSize:
+          type: integer
+          minimum: 0
+          description: in meters
+        waveMaxSize:
+          type: integer
+          minimum: 0
+          description: in meters
+        waterCurrent:
+          $ref: "#/components/schemas/WaterCurrent"
 
     ObjectStatus:
       type: "string"
-      enum:
-        - "DRAFT"
-        - "DECLINED"
-        - "AVAILABLE"
-      default: "AVAILABLE"
+      enum: [AVAILABLE, DRAFT, DECLINED]
+
+    Description:
+      type: object
+      properties:
+        language:
+          $ref: "#/components/schemas/CountryCode"
+        content:
+          type: string
+
+    CountryCode:
+      type: string
+      description: ISO 3166-1 alpha-2 code
+      enum: [AD, AE, AF, AG, AI, AL, AM, AO, AQ, AR, AS, AT, AU, AW, AX, AZ, BA, BB, BD, BE,
+             BF, BG, BH, BI, BJ, BL, BM, BN, BO, BQ, BR, BS, BT, BV, BW, BY, BZ, CA, CC,
+             CD, CF, CG, CH, CI, CK, CL, CM, CN, CO, CR, CU, CV, CW, CX, CY, CZ, DE, DJ, DK,
+             DM, DO, DZ, EC, EE, EG, EH, ER, ES, ET, FI, FJ, FK, FM, FO, FR, GA, GB, GD, GE,
+             GF, GG, GH, GI, GL, GM, GN, GP, GQ, GR, GS, GT, GU, GW, GY, HK, HM, HN, HR, HT,
+             HU, ID, IE, IL, IM, IN, IO, IQ, IR, IS, IT, JE, JM, JO, JP, KE, KG, KH, KI, KM,
+             KN, KP, KR, KW, KY, KZ, LA, LB, LC, LI, LK, LR, LS, LT, LU, LV, LY, MA, MC, MD,
+             ME, MF, MG, MH, MK, ML, MM, MN, MO, MP, MQ, MR, MS, MT, MU, MV, MW, MX, MY, MZ,
+             NA, NC, NE, NF, NG, NI, NL, "NO", NP, NR, NU, NZ, OM, PA, PE, PF, PG, PH, PK, PL,
+             PM, PN, PR, PS, PT, PW, PY, QA, RE, RO, RS, RU, RW, SA, SB, SC, SD, SE, SG, SH,
+             SI, SJ, SK, SL, SM, SN, SO, SR, SS, ST, SV, SX, SY, SZ, TC, TD, TF, TG, TH, TJ,
+             TK, TL, TM, TN, TO, TR, TT, TV, TW, TZ, UA, UG, UM, US, UY, UZ, VA, VC, VE,
+             VG, VI, VN, VU, WF, WS, YE, YT, ZA, ZM, ZW]
+
+    SportType:
+      type: string
+      enum: [WINDSURFING, KITESURFING, SURFING]
+
+    WaterType:
+      type: string
+      enum: [FLAT, WAVE]
+
+    Popularity:
+      type: string
+      enum: [S, M, H]
+
+    SpotFacility:
+      type: string
+      enum: [SCHOOLS]
+
+    Difficulty:
+      type: string
+      enum: [EASY, MEDIUM, HARD, PROS_ONLY]
+
+    Depth:
+      type: string
+      enum: [SHALLOW, DEEP]
+
+    BasicWindDirection:
+      type: string
+      enum: ["N", NE, E, SE, S, SW, W, NW]
+
+    ChopSize:
+      type: string
+      enum: ["N", S, M, H]
+
+    WaterCurrent:
+      type: string
+      enum: ["N", S, M, H]
